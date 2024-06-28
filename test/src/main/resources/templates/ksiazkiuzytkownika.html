@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowed Books</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="menubar">
+        <h2 style="color: #ffffff">Admin Panel</h2>
+        <ul class="menu">
+            <li class="menu-item"><a href="/addBook" class="menu-link">Add New Book</a></li>
+            <li class="menu-item"><a href="/bookListAdmin" class="menu-link">List of Book</a></li>
+            <li class="menu-item"><a href="/userList" class="menu-link">View User</a></li>
+            <li class="menu-item"><a href="/login" class="menu-link">Log out</a></li>
+        </ul>
+    </div>
+    <h2 style="color: #000000">Borrowed Books</h2>
+    <div class="book-list">
+        <table class="book-table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td>
+                    <form th:action="@{/returnBook(bookId=${book.id}, userId=${userId})}" method="post">
+                        <button type="submit" class="return-btn">Return</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

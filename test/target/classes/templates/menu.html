@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <link rel="stylesheet" href="css/menustyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menubar">
+            <h2 style="color: #ffffff"><a href="/menu" style="color: inherit; text-decoration: none;">Navigation Menu</a></h2>
+            <ul class="menu">
+                <li class="menu-item"><a href="/search" class="menu-link">Search Book</a></li>
+                <li class="menu-item"><a href="/bookList" class="menu-link">List of Books</a></li>
+                <li class="menu-item"><a href="/borrowed" class="menu-link">Borrowed Books</a></li>
+                <li class="menu-item"><a href="/login" class="menu-link">Log out</a></li>
+                <li class="menu-item"><a href="/help" class="menu-link">Help</a></li>
+            </ul>
+        </div>
+        <h2>List Of New Books</h2>
+        <ul class="book-list">
+            <th:block th:each="book : ${books}" th:if="${book.id == 36 || book.id == 39}">
+                <li class="book-item">
+                    <img th:src="@{${book.photoPath}}" alt="Book Cover" class="book-image">
+                    <div>
+                        <div class="book-title" th:text="${book.title}"></div>
+                        <div class="book-author" th:text="${book.author}"></div>
+                        <div class="book-date" th:text="${book.date}"></div>
+                        <a th:href="@{/bookPage(id=${book.id})}" class="book-link" th:text="'Read more about ' + ${book.title}"></a>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+        <h2>List Of Best Books</h2>
+        <ul class="book-list">
+            <th:block th:each="book : ${books}" th:if="${book.id == 38 || book.id == 35}">
+                <li class="book-item">
+                    <img th:src="@{${book.photoPath}}" alt="Book Cover" class="book-image">
+                    <div>
+                        <div class="book-title" th:text="${book.title}"></div>
+                        <div class="book-author" th:text="${book.author}"></div>
+                        <div class="book-date" th:text="${book.date}"></div>
+                        <a th:href="@{/bookPage(id=${book.id})}" class="book-link" th:text="'Read more about ' + ${book.title}"></a>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</body>
+</html>

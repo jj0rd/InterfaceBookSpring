@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-admin Users</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="menubar">
+        <h2 style="color: #ffffff">Admin Panel</h2>
+        <ul class="menu">
+            <li class="menu-item"><a href="/addBook" class="menu-link">Add New Book</a></li>
+            <li class="menu-item"><a href="/bookListAdmin" class="menu-link">List of Book</a></li>
+            <li class="menu-item"><a href="/userList" class="menu-link">View User</a></li>
+            <li class="menu-item"><a href="/login" class="menu-link">Log out</a></li>
+        </ul>
+    </div>
+    <h2 style="color: #000000">Non-admin Users</h2>
+    <table class="user-table">
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.fName}"></td>
+            <td th:text="${user.lName}"></td>
+            <td>
+                <a th:href="@{/userBooks(id=${user.id})}">
+                    <button class="view-btn" data-userid="${user.id}">View</button>
+                </a>
+            </td>
+            <!--More users would go here -->
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

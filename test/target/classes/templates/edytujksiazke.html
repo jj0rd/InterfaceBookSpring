@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .confirmation {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Zapobiega natychmiastowemu przesłaniu formularza
+
+            // Wyświetla komunikat potwierdzenia
+            document.getElementById('confirmation').style.display = 'block';
+
+            // Przesyła formularz po 2 sekundach
+            setTimeout(function() {
+                event.target.submit();
+            }, 2000);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="menubar">
+        <h2 style="color: #ffffff">Admin Panel</h2>
+        <ul class="menu">
+            <li class="menu-item"><a href="/addBook" class="menu-link">Add New Book</a></li>
+            <li class="menu-item"><a href="/bookListAdmin" class="menu-link">List of Book</a></li>
+            <li class="menu-item"><a href="/userList" class="menu-link">View User</a></li>
+            <li class="menu-item"><a href="/login" class="menu-link">Log out</a></li>
+        </ul>
+    </div>
+    <h2 style="color: #000000">Edit Book</h2>
+    <form action="/editBook" method="POST" class="edit-book-form" enctype="multipart/form-data" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="id" name="id" th:value="${book.id}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:value="${book.title}" required><br><br>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" th:value="${book.author}" required><br><br>
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" th:value="${book.date}" required><br><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" required th:text="${book.description}"></textarea><br><br>
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" th:value="${book.photoPath}"><br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <div id="confirmation" class="confirmation">
+        Book has been updated successfully!
+    </div>
+</div>
+</body>
+</html>

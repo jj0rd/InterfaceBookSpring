@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container form {
+            margin-top: 20px;
+        }
+
+        .container form input[type="text"],
+        .container form input[type="email"],
+        .container form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .container form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .container form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .container .switch-page {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container .switch-page a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .container .switch-page a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post" action="/login" th:object="${loginRequest}">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <div class="switch-page">
+            <a href="/register">Don't have an account? Register here</a>
+        </div>
+    </div>
+
+
+
+    <script>
+        // JavaScript to switch between login and registration forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('#login');
+            const registrationForm = document.querySelector('#registration');
+            const loginLink = document.querySelector('#login-link');
+            const registrationLink = document.querySelector('#registration-link');
+
+            loginLink.addEventListener('click', function() {
+                loginForm.style.display = 'block';
+                registrationForm.style.display = 'none';
+            });
+
+            registrationLink.addEventListener('click', function() {
+                loginForm.style.display = 'none';
+                registrationForm.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
